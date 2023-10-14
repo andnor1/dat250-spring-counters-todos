@@ -14,13 +14,13 @@ public class TodoController {
   private final Map<Long, Todo> todos = new HashMap<>();
   public static final String TODO_WITH_THE_ID_X_NOT_FOUND = "Todo with the id %s not found!";
   private Long ids = 0L;
-
   @PostMapping
   public Todo createTodo(@RequestBody Todo todo) {
     todo.setId(ids++);
     todos.put(todo.getId(), todo);
     return todo;
   }
+
 
   @GetMapping("/{id}")
   public Todo getTodoById(@PathVariable Long id) {
