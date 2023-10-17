@@ -1,12 +1,12 @@
-<h1>Todos</h1>
-<table class="custom-table">
+<h2>Todos</h2>
+<table>
   <tr>
     <th>Id</th>
     <th>Description</th>
     <th>Summary</th>
     <th></th>
   </tr>
-  <tr *ngFor="let todo of todos">
+  <tr *ngFor="let todo of todos; let i = index">
     <td>{{ todo.id }}</td>
     <td>{{ todo.description }}</td>
     <td>{{ todo.summary }}</td>
@@ -15,4 +15,14 @@
     </td>
   </tr>
 </table>
+
+<h2>Add Todo</h2>
+<form (ngSubmit)="addTodo()">
+  <label for="desc">Description:</label><br>
+  <input type="text" id="desc" name="desc" [(ngModel)]="newTodo.description"><br>
+  <label for="sum">Summary:</label><br>
+  <input type="text" id="sum" name="sum" [(ngModel)]="newTodo.summary"><br>
+  <button type="submit">Add</button>
+</form>
+
 <button (click)="refreshTodos()">Refresh</button>

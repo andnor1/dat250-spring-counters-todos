@@ -1,33 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from '../todo.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
   todos: any[] = [];
+  newTodo: any = {};
 
-  constructor(private todoService: TodoService) { }
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.loadTodos();
+  ngOnInit() {
+    this.refreshTodos();
   }
 
-  loadTodos(): void {
-    this.todoService.getTodos().subscribe((data: any) => {
-      this.todos = data;
+  refreshTodos() {
+    // Make an HTTP GET request to fetch todos from your API
+    this.http.get<any[]>('YOUR_API_URL_HERE').subscribe((response) => {
+      this.todos = response;
     });
   }
 
-  deleteTodo(todoId: number): void {
-    this.todoService.deleteTodo(todoId).subscribe(() => {
-      this.loadTodos();
+  addTodo() {
+    // Make an HTTP POST request to add a new todo
+    this.http.post('YOUR_API_URL_HERE', this.newTodo).subscribe(() => {
+      // Refresh the todos list after adding a new todo
+      this.refreshTodos();
+
+      // Optionally, you can reset the form
+      this.newTodo = {};
     });
   }
 
-  refreshTodos(): void {
-    this.loadTodos();
+  deleteTodo(id: number) {
+    // Make an HTTP DELETE request to delete a todo by its ID
+    this.http.delete(`YOUR_API_URL_HERE/${id}`).subscribe(() => {
+      // Refresh the todos list after deleting a todo
+      this.refreshTodos();
+    });
   }
 }

@@ -1,15 +1,37 @@
-.custom-table {
-  font-family: arial, sans-serif;
+table {
+  font-family: Arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-.custom-table td, .custom-table th {
+td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-.custom-table tr:nth-child(even) {
+tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
 }
